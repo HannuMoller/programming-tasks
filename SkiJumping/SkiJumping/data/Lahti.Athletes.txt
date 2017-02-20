@@ -1,0 +1,16 @@
+1:Nykänen Matti:FIN
+2:Nieminen Toni:FIN
+3:Ahonen Janne:FIN
+4:Weissflog Jens:GER
+5:Kasai Noriaki:JPN
+6:Stoch Kamil:POL
+7:Bulau Horst:CAN
+8:Edwards Eddie:GBR
+9:Innauer Toni:AUT
+10:Larinto Ville:FIN
+11:Amman Simon:SUI
+12:Happonen Janne:FIN
+13:Hautamäki Matti:FIN
+14:Boklöv Jan:SWE
+15:Malysz Adam:POL
+16:Schlierenzauer Gregor:AUT
