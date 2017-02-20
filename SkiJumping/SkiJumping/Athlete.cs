@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SkiJumping
 {
     /// <summary>
     /// Skijumper data
     /// </summary>
-    class Athlete // : IComparable
+    class Athlete
     {
         public int number; // jumper's starting number (jump order)
         public string name; // jumper's name
@@ -36,7 +31,7 @@ namespace SkiJumping
         /// set jumper's jump length
         /// </summary>
         /// <param name="jump"> jump length in meters </param>
-        public void setJump(float jump)
+        public void SetJump(float jump)
         {
             this.jump = jump;
         }
@@ -45,7 +40,7 @@ namespace SkiJumping
         /// set jumper's total points
         /// </summary>
         /// <param name="points"> points </param>
-        public void setPoints(float points)
+        public void SetPoints(float points)
         {
             this.points = points;
         }
@@ -54,18 +49,10 @@ namespace SkiJumping
         /// one-line presentation of jumper data
         /// </summary>
         /// <returns> jumper data </returns>
-        public string toString()
+        public override string ToString()
         {
             return string.Format("{0}:{1} ({2}), {3:F1}m, {4:F1}", number, name, country, jump, points);
         }
-
-/*        int IComparable.CompareTo(object a)
-        {
-            Athlete a2 = (Athlete) a;
-            return (this.number - a2.number);
-        }
-
-*/
 
     }
 }

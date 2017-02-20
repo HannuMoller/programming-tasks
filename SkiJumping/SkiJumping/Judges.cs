@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkiJumping
 {
@@ -17,7 +13,7 @@ namespace SkiJumping
         /// get the technical points from judges
         /// </summary>
         /// <returns></returns>
-        public static float getPoints()
+        public static float GetPoints()
         {
             var points = new float[JUDGES];
 
@@ -35,14 +31,14 @@ namespace SkiJumping
                     }
                 }
                 catch (Exception ex) {
-                    // illegal input
+                    // illegal input -> read again
                 }
             }
 
             // sort the points
             Array.Sort(points);
 
-            // sum the points given by the judges, ignoring highest value and lowest value
+            // sum the points given by the judges, ignoring highest value and lowest value (= first and last values in the array)
             float total = 0;
             i = 1;
             while (i < JUDGES-1)

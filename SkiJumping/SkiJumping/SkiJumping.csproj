@@ -44,9 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Athlete.cs" />
+    <Compile Include="AthleteData.cs" />
     <Compile Include="Compensation.cs" />
     <Compile Include="FloatComparer.cs" />
     <Compile Include="Hill.cs" />
+    <Compile Include="HillData.cs" />
+    <Compile Include="Interact.cs" />
     <Compile Include="Judges.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

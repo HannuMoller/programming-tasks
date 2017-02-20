@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SkiJumping
 {
@@ -12,8 +8,6 @@ namespace SkiJumping
     class Compensation
     {
         public Hill hill; // reference to the hill
-        public int baseGate; // gate number in the beginning of the competition
-        public int currGate; // current gate number
 
         /// <summary>
         /// constructor
@@ -22,27 +16,6 @@ namespace SkiJumping
         public Compensation(Hill hill)
         {
             this.hill = hill;
-            this.baseGate = 0;
-            this.currGate = 0;
-        }
-
-        /// <summary>
-        /// set base gate at the beginning of the competition
-        /// </summary>
-        /// <param name="baseGate"> gate number </param>
-        public void setBaseGate(int baseGate)
-        {
-            this.baseGate = baseGate;
-            this.currGate = baseGate;
-        }
-
-        /// <summary>
-        /// change gate
-        /// </summary>
-        /// <param name="newGate"> new gate for the athletes </param>
-        public void changeGate(int newGate)
-        {
-            currGate = newGate;
         }
 
         /// <summary>
@@ -53,18 +26,18 @@ namespace SkiJumping
         /// <returns> compensation in meters (rounded in accuracy of half a meter) </returns>
         public float WindCompensation(float wind)
         {
-            float comp = -wind * (hill.Kpoint - 36) / 20;
-            return RoundedHalfMeter(comp);
+            float compensation = -wind * (hill.Kpoint - 36) / 20;
+            return RoundedHalfMeter(compensation);
         }
 
         /// <summary>
         /// calculate Gate Compensation
         /// </summary>
         /// <returns> compensation in meters; rounded in accuracy of half a meter </returns>
-        public float gateCompensation()
+        public float GateCompensation()
         {
-            float comp = ((float)(baseGate - currGate));
-            comp *= hill.gateStep * hill.gateComp;
+            float comp = ((float)(hill.baseGate - hill.currGate));
+            comp *= hill.gateStep * hill.gateCompensationPerMeter;
             return RoundedHalfMeter(comp);
             
         }
