@@ -17,7 +17,7 @@ namespace BankBarCode
         /// </summary>
         /// <param name="account"> IBAN account number (without gaps) </param>
         /// <returns> true, if IBAN account number is valid </returns>
-        public static bool check(string account)
+        public static bool Check(string account)
         {
             try
             {

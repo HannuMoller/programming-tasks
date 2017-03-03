@@ -16,7 +16,7 @@ namespace BankBarCode
         /// set reference number
         /// </summary>
         /// <param name="reference"> reference number (in domestic format)</param>
-        public override void setReference(string reference)
+        public override void SetReference(string reference)
         {
             while (reference.Length < 20)
             {
@@ -30,7 +30,7 @@ namespace BankBarCode
         /// get bank barcode (domestic format)
         /// </summary>
         /// <returns> bank barcode </returns>
-        public override string getBarCode()
+        public override string GetBarCode()
         {
             string barcode = string.Format("4{0}{1:D6}{2:D2}000{3}{4}", account, euros, cents, reference, duedate);
             return barcode;

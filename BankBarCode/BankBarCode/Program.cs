@@ -39,28 +39,28 @@ namespace BankBarCode
             do
             {
                 Console.Write("Bank account : ");
-                account = removeGaps(Console.ReadLine());
-                if (!IBANChecker.check(account))
+                account = RemoveGaps(Console.ReadLine());
+                if (!IBANChecker.Check(account))
                 {
                     Console.WriteLine("Invalid bank account");
                     account = null;
                 }
             } while (account == null);
 
-            barcode.setAccount(account);
+            barcode.SetAccount(account);
 
             string reference = null;
             do
             {
                 Console.Write("Bank reference number (in domestic format) : ");
-                reference = removeGaps(Console.ReadLine());
-                if (!ReferenceChecker.check(reference))
+                reference = RemoveGaps(Console.ReadLine());
+                if (!ReferenceChecker.Check(reference))
                 {
                     reference = null;
                 }
             } while (reference == null);
 
-            barcode.setReference(reference);
+            barcode.SetReference(reference);
 
             int euros = -1;
             while (euros < 0)
@@ -80,7 +80,7 @@ namespace BankBarCode
                     euros = -1;
                 }
             }
-            barcode.setEuros(euros);
+            barcode.SetEuros(euros);
 
             int cents = -1;
             while (cents < 0)
@@ -99,7 +99,7 @@ namespace BankBarCode
                     Console.WriteLine("Invalid cent amount!");
                 }
             }
-            barcode.setCents(cents);
+            barcode.SetCents(cents);
 
             string dueDate = null;
             while (dueDate == null)
@@ -114,14 +114,14 @@ namespace BankBarCode
                     dueDate = null;
                 }
             }
-            barcode.setDueDate(dueDate);
+            barcode.SetDueDate(dueDate);
 
-            Console.WriteLine("IBAN = {0}", barcode.getBarCode());
+            Console.WriteLine("IBAN = {0}", barcode.GetBarCode());
             Console.ReadKey();
         }
 
 
-        private static string removeGaps(string x)
+        private static string RemoveGaps(string x)
         {
             int i = x.IndexOf(' ');
             while (i > -1) {

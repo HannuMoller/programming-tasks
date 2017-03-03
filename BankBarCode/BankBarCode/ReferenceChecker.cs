@@ -17,7 +17,7 @@ namespace BankBarCode
         /// </summary>
         /// <param name="reference"> domestic reference </param>
         /// <returns> true, if reference is ok </returns>
-        public static bool check(string reference)
+        public static bool Check(string reference)
         {
             var multipliers = new int[] { 7, 3, 1 };
             int mx = multipliers.Length - 1;
@@ -58,7 +58,7 @@ namespace BankBarCode
         /// </summary>
         /// <param name="reference"> domestic reference </param>
         /// <returns> international reference (or domestic reference, if it contains non digit characters) </returns>
-        public static string convertToISO11649(string reference)
+        public static string ConvertToISO11649(string reference)
         {
             try
             {

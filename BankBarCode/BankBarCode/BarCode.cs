@@ -21,7 +21,7 @@ namespace BankBarCode
         /// set bank account number
         /// </summary>
         /// <param name="account"> bank account number </param>
-        public void setAccount(string account)
+        public void SetAccount(string account)
         {
             this.account = account.Substring(2); // remove leading two letters
         }
@@ -30,13 +30,13 @@ namespace BankBarCode
         /// set reference number
         /// </summary>
         /// <param name="reference"> reference number </param>
-        public abstract void setReference(string reference);
+        public abstract void SetReference(string reference);
 
         /// <summary>
         /// set euro count
         /// </summary>
         /// <param name="euros"> euro count </param>
-        public void setEuros(int euros)
+        public void SetEuros(int euros)
         {
             this.euros = euros;
         }
@@ -45,7 +45,7 @@ namespace BankBarCode
         /// set euro cent count
         /// </summary>
         /// <param name="cents"> euro cent count </param>
-        public void setCents(int cents)
+        public void SetCents(int cents)
         {
             this.cents = cents;
         }
@@ -54,7 +54,7 @@ namespace BankBarCode
         /// set due date
         /// </summary>
         /// <param name="date"> due date </param>
-        public void setDueDate(string date)
+        public void SetDueDate(string date)
         {
             this.duedate = date;
         }
@@ -63,7 +63,7 @@ namespace BankBarCode
         /// get bank barcode
         /// </summary>
         /// <returns> bank barcode </returns>
-        public abstract string getBarCode();
+        public abstract string GetBarCode();
 
     }
 }
