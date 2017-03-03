@@ -1,0 +1,22 @@
+﻿<Window x:Class="BankObjectsV2.ActivitiesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankObjectsV2"
+        mc:Ignorable="d"
+        Title="ActivitiesWindow" Height="373.404" Width="492.553">
+    <Grid>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Pankki:" VerticalAlignment="Top" FontSize="10" Height="18" IsEnabled="False"/>
+        <TextBox x:Name="textBoxBank" HorizontalAlignment="Left" Height="18" Margin="46,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="429" FontSize="10" IsEnabled="False"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,33,0,0" TextWrapping="Wrap" Text="Tapahtumat ajalta:" VerticalAlignment="Top" Width="272" FontSize="10" Height="18" IsEnabled="False"/>
+        <TextBox x:Name="textBoxDate1" HorizontalAlignment="Left" Height="18" Margin="10,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" FontSize="10"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="95,56,0,0" TextWrapping="Wrap" Text=" - " VerticalAlignment="Top" FontSize="10" Height="18"/>
+        <TextBox x:Name="textBoxDate2" HorizontalAlignment="Left" Height="18" Margin="109,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" FontSize="10"/>
+        <Separator HorizontalAlignment="Left" Height="8" Margin="10,80,0,0" VerticalAlignment="Top" Width="465"/>
+        <ListBox x:Name="listBoxActivities" HorizontalAlignment="Left" Height="240" Margin="10,93,0,0" VerticalAlignment="Top" Width="465" FontSize="10" SelectionChanged="listBoxActivities_SelectionChanged"/>
+        <Button x:Name="buttonOk" Content="Hae tapahtumat" HorizontalAlignment="Left" Margin="206,56,0,0" VerticalAlignment="Top" Width="102" FontSize="10" Click="buttonOk_Click"/>
+        <Button x:Name="buttonCancel" Content="Paluu" HorizontalAlignment="Left" Margin="325,56,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.32,0.166" IsCancel="True" FontSize="10" Click="buttonCancel_Click"/>
+
+    </Grid>
+</Window>

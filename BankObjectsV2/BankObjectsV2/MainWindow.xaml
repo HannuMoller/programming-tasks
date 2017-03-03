@@ -1,0 +1,15 @@
+﻿<Window x:Class="BankObjectsV2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankObjectsV2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="229.063" Width="263.902">
+    <Grid Margin="0,10,0,105">
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="Pankki:" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxBank" HorizontalAlignment="Left" Height="23" Margin="9,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="237"/>
+        <Button x:Name="buttonCreateBank" Content="Luo pankki" HorizontalAlignment="Left" Margin="76,57,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.339,2.022" Click="buttonCreateBank_Click" FontSize="10"/>
+
+    </Grid>
+</Window>
