@@ -8,8 +8,8 @@ namespace BankObjects
     /// </summary>
     class Bank
     {
-        private string name;
-        private List<BankAccount> bankAccounts;
+        private string _name;
+        private List<BankAccount> _bankAccounts;
 
         /// <summary>
         /// Constructor
@@ -17,22 +17,22 @@ namespace BankObjects
         /// <param name="name"> bank's name </param>
         public Bank(string name)
         {
-            this.name = name;
-            bankAccounts = new List<BankAccount>();
+            this._name = name;
+            this._bankAccounts = new List<BankAccount>();
         }
 
         /// <summary>
         /// Create new bank account
         /// </summary>
         /// <returns> account number for the new bank account </returns>
-        public string getNewBankAccount()
+        public string GetNewBankAccount()
         {
             
-            var bankAccountNumber = BankUtils.generateIBAN();
+            var bankAccountNumber = BankUtils.GenerateIban();
             Console.WriteLine("New bank account: {0}", bankAccountNumber);
-            var bankAccountCreationDate = BankUtils.getDate("bank account creation");
+            var bankAccountCreationDate = BankUtils.GetDate("bank account creation");
 
-            bankAccounts.Add(new BankAccount(bankAccountNumber, bankAccountCreationDate));
+            _bankAccounts.Add(new BankAccount(bankAccountNumber, bankAccountCreationDate));
 
             return bankAccountNumber;
         }
@@ -42,9 +42,9 @@ namespace BankObjects
         /// </summary>
         /// <param name="accountNumber"> account number </param>
         /// <returns> bank account </returns>
-        public BankAccount getBankAccount(string accountNumber)
+        public BankAccount GetBankAccount(string accountNumber)
         {
-            return bankAccounts.Find(x => x.accountNumber.Equals(accountNumber));
+            return _bankAccounts.Find(x => x.AccountNumber.Equals(accountNumber));
         }
 
     }

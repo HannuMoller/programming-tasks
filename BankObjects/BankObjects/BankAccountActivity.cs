@@ -5,8 +5,8 @@
     /// </summary>
     public class BankAccountActivity
     {
-        public string date;
-        public float amount;
+        private string _date;
+        private float _amount;
 
         /// <summary>
         /// Constructor
@@ -15,9 +15,20 @@
         /// <param name="amount"> amount of money </param>
         public BankAccountActivity(string date, float amount)
         {
-            this.date = date;
-            this.amount = amount;
+            this._date = date;
+            this._amount = amount;
         }
 
+        public string Date
+        {
+            get { return _date; }
+            set { _date = value; }
+        }
+
+        public float Amount
+        {
+            get { return _amount; }
+            set { _amount = value; }
+        }
     }
 }

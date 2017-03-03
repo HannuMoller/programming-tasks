@@ -27,7 +27,7 @@ namespace BankObjects
                 Console.Write("- first name : ");
                 string firstname = Console.ReadLine();
                 var customer = new Customer(firstname, lastName);
-                customer.BankAccountNumber = bank.getNewBankAccount();
+                customer.BankAccountNumber = bank.GetNewBankAccount();
                 customers.Add(customer);
 
                 AddActivities(bank, customer);
@@ -35,25 +35,25 @@ namespace BankObjects
 
             foreach (var customer in customers)
             {
-                Console.WriteLine("Customer:{0}, account:{1}, balance:{2:F2}", customer, customer.BankAccountNumber, bank.getBankAccount(customer.BankAccountNumber).getBalance());
+                Console.WriteLine("Customer:{0}, account:{1}, balance:{2:F2}", customer, customer.BankAccountNumber, bank.GetBankAccount(customer.BankAccountNumber).Balance);
             }
             Console.WriteLine("====================================");
 
-            var firstDate = BankUtils.getDate("first");
-            var lastDate = BankUtils.getDate("last");
+            var firstDate = BankUtils.GetDate("first");
+            var lastDate = BankUtils.GetDate("last");
             foreach (var customer in customers)
             {
-                var account = bank.getBankAccount(customer.BankAccountNumber);
+                var account = bank.GetBankAccount(customer.BankAccountNumber);
                 var prevDate = BankUtils.PreviousDate(firstDate);
-                float balance = account.getBalance(prevDate);
+                float balance = account.GetBalance(prevDate);
                 Console.WriteLine("Customer:{0}, account:{1}, balance at {2}:{3:F2}", customer, customer.BankAccountNumber, prevDate, balance);
 
-                var activities = account.getActivities(firstDate, lastDate);
+                var activities = account.GetActivities(firstDate, lastDate);
 
                 foreach (BankAccountActivity activity in activities)
                 {
-                    balance += activity.amount;
-                    Console.WriteLine("Date:{0}, amount:{1,-12:F2}, balance:{2,-12:F2}", activity.date, activity.amount, balance);
+                    balance += activity.Amount;
+                    Console.WriteLine("Date:{0}, amount:{1,-12:F2}, balance:{2,-12:F2}", activity.Date, activity.Amount, balance);
                 }
                 Console.WriteLine();
             }
@@ -69,8 +69,8 @@ namespace BankObjects
         static void AddActivities(Bank bank, Customer customer)
         {
             Console.WriteLine("Enter withdrawal/deposit for customer {0} (0 ends)", customer);
-            var account = bank.getBankAccount(customer.BankAccountNumber);
-            var lastActivityDate = account.creationDate;
+            var account = bank.GetBankAccount(customer.BankAccountNumber);
+            var lastActivityDate = account.CreationDate;
             while (true)
             {
                 Console.Write("- amount : ");
@@ -84,7 +84,7 @@ namespace BankObjects
                     var date = "00000000";
                     while (date.CompareTo(lastActivityDate) < 0)
                     {
-                        date = BankUtils.getDate("action");
+                        date = BankUtils.GetDate("action");
                     }
                     account.AddBankAccountActivity(new BankAccountActivity(date, amount));
                     lastActivityDate = date;

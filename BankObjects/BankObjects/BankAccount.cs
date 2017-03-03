@@ -5,26 +5,38 @@ namespace BankObjects
 {
     class BankAccount
     {
-        public string accountNumber;
-        public string creationDate;
-        public ArrayList activities;
-        public float balance; // current balance
+        private string _accountNumber;
+        private string _creationDate;
+        private ArrayList _activities;
+        private float _balance; // current balance
 
         public BankAccount(string accountNumber, string creationDate)
         {
-            this.accountNumber = accountNumber;
-            this.creationDate = creationDate;
-            activities = new ArrayList();
-            balance = 0.0f;
+            this._accountNumber = accountNumber;
+            this._creationDate = creationDate;
+            _activities = new ArrayList();
+            _balance = 0.0f;
+        }
+
+        public string AccountNumber
+        {
+            get { return _accountNumber; }
+            set { _accountNumber = value; }
         }
 
         /// <summary>
         /// get current balance
         /// </summary>
         /// <returns> balance </returns>
-        public float getBalance()
+        public float Balance
         {
-            return balance;
+            get { return _balance; }
+        }
+
+        public string CreationDate
+        {
+            get { return _creationDate; }
+            set { _creationDate = value; }
         }
 
         /// <summary>
@@ -32,16 +44,16 @@ namespace BankObjects
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public float getBalance(string date)
+        public float GetBalance(string date)
         {
             var balance2 = 0.0f;
 
-            var activities2 = from BankAccountActivity activity in activities
-                              where (activity.date.CompareTo(date) <= 0)
+            var activities2 = from BankAccountActivity activity in _activities
+                              where (activity.Date.CompareTo(date) <= 0)
                               select activity;
             foreach (BankAccountActivity activity in activities2)
             {
-                balance2 += activity.amount;
+                balance2 += activity.Amount;
             }
             return balance2;
         }
@@ -50,9 +62,9 @@ namespace BankObjects
         /// get all bank account activities
         /// </summary>
         /// <returns></returns>
-        public ArrayList getActivities()
+        public ArrayList GetActivities()
         {
-            return activities;
+            return _activities;
         }
 
         /// <summary>
@@ -61,10 +73,10 @@ namespace BankObjects
         /// <param name="firstDate"></param>
         /// <param name="lastDate"></param>
         /// <returns></returns>
-        public BankAccountActivity[] getActivities(string firstDate, string lastDate)
+        public BankAccountActivity[] GetActivities(string firstDate, string lastDate)
         {
-            var activities2 = from BankAccountActivity activity in activities
-                             where (activity.date.CompareTo(firstDate) >= 0 && activity.date.CompareTo(lastDate) <= 0)
+            var activities2 = from BankAccountActivity activity in _activities
+                             where (activity.Date.CompareTo(firstDate) >= 0 && activity.Date.CompareTo(lastDate) <= 0)
                              select activity;
 
             return activities2.ToArray();
@@ -76,8 +88,8 @@ namespace BankObjects
         /// <param name="activity"></param>
         public void AddBankAccountActivity(BankAccountActivity activity)
         {
-            activities.Add(activity);
-            balance += activity.amount;
+            _activities.Add(activity);
+            _balance += activity.Amount;
         }
 
     }

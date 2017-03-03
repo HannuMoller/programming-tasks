@@ -11,7 +11,7 @@ namespace BankObjects
         /// </summary>
         /// <param name="type"> which kind of date is requested </param>
         /// <returns> validated date </returns>
-        public static string getDate(string type)
+        public static string GetDate(string type)
         {
             while (true)
             {
@@ -31,8 +31,8 @@ namespace BankObjects
         /// <summary>
         /// Get preceding date
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns> </returns>
+        /// <param name="date"> date </param>
+        /// <returns> date for previous day </returns>
         public static string PreviousDate(string date)
         {
             var dt = DateTime.ParseExact(date, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
@@ -45,7 +45,7 @@ namespace BankObjects
         /// </summary>
         /// <param name="bban"> account number </param>
         /// <returns> checksum </returns>
-        private static char generateBBANchecksum(string bban)
+        private static char GenerateBbanChecksum(string bban)
         {
             char[] digits = bban.ToArray();
             int checksum = 0;
@@ -73,7 +73,7 @@ namespace BankObjects
         /// </summary>
         /// <param name="bban"> bank account number in domestic format (either with or without intermediate '-') </param>
         /// <returns> bank account number as 14 digits </returns>
-        public static string normalizeBBAN(string bban)
+        public static string NormalizeBban(string bban)
         {
             bban = bban.Replace("-", "");
             int fillPos = 0;
@@ -96,7 +96,7 @@ namespace BankObjects
         /// </summary>
         /// <param name="bban"> account number in domestic format </param>
         /// <returns> true, if account number is correct </returns>
-        public static bool validateBBAN(string bban)
+        public static bool ValidateBban(string bban)
         {
             string[] parts = bban.Split('-');
             switch (parts.Count())
@@ -294,9 +294,9 @@ namespace BankObjects
                     return false; // unknown bank
             }
 
-            bban = normalizeBBAN(bban);
+            bban = NormalizeBban(bban);
 
-            char checksum = generateBBANchecksum(bban.Substring(0, 13));
+            char checksum = GenerateBbanChecksum(bban.Substring(0, 13));
             if (!char.IsDigit(checksum))
                 return false; // bban contained something which prevented checksum calculation
 
@@ -309,12 +309,12 @@ namespace BankObjects
         /// <param name="countryCode"> ISO-code for country </param>
         /// <param name="bban"> bank account number in domestic format (assume it is already validated)</param>
         /// <returns> IBAN, or null, if illegal country code is given </returns>
-        public static string createIBAN(string countryCode, string bban)
+        public static string CreateIban(string countryCode, string bban)
         {
             try
             {
                 CultureInfo culture = CultureInfo.GetCultureInfo(countryCode);
-                bban = normalizeBBAN(bban);
+                bban = NormalizeBban(bban);
                 char[] ph1 = (bban + countryCode + "00").ToArray();
                 string iban = "";
                 for (int i=0; i<ph1.Length; i++)
@@ -350,7 +350,7 @@ namespace BankObjects
         /// 
         /// </summary>
         /// <returns> IBAN </returns>
-        public static string generateIBAN()
+        public static string GenerateIban()
         {
             var allowedBankGroups = new char[] { '1', '2', '6', '8' }; // keep it simple, use only these bank groups
 
@@ -359,9 +359,9 @@ namespace BankObjects
             int bankBody = rnd.Next(100000);
             int accountBody = rnd.Next(10000000);
             string bban = string.Format("{0}{1:D5}{2:D7}", bankGroup, bankBody, accountBody);
-            char checksum = generateBBANchecksum(bban);
+            char checksum = GenerateBbanChecksum(bban);
 
-            return createIBAN("FI", bban + checksum);
+            return CreateIban("FI", bban + checksum);
         }
 
     }
