@@ -14,3 +14,6 @@
 3. BankObjects
 	- bank, customer, bank account, account activities
 	- creation and validation functions for both BBAN and IBAN
+
+3b. BankObjectsV2
+	- some kind of WPF version of BankObjects
