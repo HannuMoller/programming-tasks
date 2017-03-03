@@ -10,3 +10,7 @@
 	- current and final standings list
 
 	http://www.ess.fi/urheilu/hiihtolajit/2013/03/06/ja-kokonaispisteet-ovat-nain-sujuu-makihypyn-pistelasku
+	
+3. BankObjects
+	- bank, customer, bank account, account activities
+	- creation and validation functions for both BBAN and IBAN
