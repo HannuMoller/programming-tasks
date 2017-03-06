@@ -10,6 +10,10 @@ namespace BankObjectsV2
     {
         private Bank _bank;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="bank"></param>
         public CustomerWindow(Bank bank)
         {
             InitializeComponent();
@@ -18,6 +22,11 @@ namespace BankObjectsV2
             textBoxBank.Text = bank.Name;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_Click(object sender, RoutedEventArgs e)
         {
             string lastName = textBoxLastName.Text;
@@ -34,6 +43,11 @@ namespace BankObjectsV2
             Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;

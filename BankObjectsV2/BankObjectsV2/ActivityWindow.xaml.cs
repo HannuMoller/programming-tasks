@@ -26,6 +26,11 @@ namespace BankObjectsV2
             textBoxAccount.Text = customer.BankAccountNumber;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonAddActivity_Click(object sender, RoutedEventArgs e)
         {
             var date = textBoxDate.Text;
@@ -43,7 +48,7 @@ namespace BankObjectsV2
 
             var transaction = new BankAccountTransaction(date, amount);
             var account = _bank.GetBankAccount(_customer.BankAccountNumber);
-            account.AddBankAccountActivity(transaction);
+            account.AddBankAccountTransaction(transaction);
 
             List<BankAccountTransaction> items = (List<BankAccountTransaction>) listViewActivities.ItemsSource;
             if (items == null)
@@ -61,6 +66,11 @@ namespace BankObjectsV2
             textBoxAmount.Clear();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonReady_Click(object sender, RoutedEventArgs e)
         {
             Close();

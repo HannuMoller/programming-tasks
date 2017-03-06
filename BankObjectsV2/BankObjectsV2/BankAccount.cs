@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BankObjects
@@ -6,13 +7,13 @@ namespace BankObjects
     public class BankAccount
     {
         private string _accountNumber;
-        private ArrayList _transactions;
+        private List<BankAccountTransaction> _transactions;
         private float _balance; // current balance
 
         public BankAccount(string accountNumber)
         {
             this._accountNumber = accountNumber;
-            _transactions = new ArrayList();
+            _transactions = new List<BankAccountTransaction>();
             _balance = 0.0f;
         }
 
@@ -39,23 +40,21 @@ namespace BankObjects
         /// <returns></returns>
         public float GetBalance(string date)
         {
-            var balance2 = 0.0f;
+            var balance = 0.0f;
 
-            var transactions2 = from BankAccountTransaction transaction in _transactions
-                              where (transaction.Date.CompareTo(date) <= 0)
-                              select transaction;
-            foreach (BankAccountTransaction transaction in transactions2)
+            var transactions = _transactions.Where(transaction => transaction.Date.CompareTo(date) <= 0).ToList();
+            transactions.ForEach(transaction =>
             {
-                balance2 += transaction.Amount;
-            }
-            return balance2;
+                balance += transaction.Amount;
+            });
+            return balance;
         }
 
         /// <summary>
         /// get all bank account activities
         /// </summary>
         /// <returns></returns>
-        public ArrayList GetTransactions()
+        public List<BankAccountTransaction> GetTransactions()
         {
             return _transactions;
         }
@@ -68,18 +67,18 @@ namespace BankObjects
         /// <returns></returns>
         public BankAccountTransaction[] GetTransactions(string firstDate, string lastDate)
         {
-            var transactions2 = from BankAccountTransaction transaction in _transactions
+            var transactions = from BankAccountTransaction transaction in _transactions
                 where (transaction.Date.CompareTo(firstDate) >= 0 && transaction.Date.CompareTo(lastDate) <= 0)
                 select transaction;
 
-            return transactions2.ToArray();
+            return transactions.ToArray();
         }
 
         /// <summary>
         /// Add new bank account activity
         /// </summary>
-        /// <param name="activity"></param>
-        public void AddBankAccountActivity(BankAccountTransaction transaction)
+        /// <param name="transaction"></param>
+        public void AddBankAccountTransaction(BankAccountTransaction transaction)
         {
             _transactions.Add(transaction);
             _balance += transaction.Amount;

@@ -11,6 +11,10 @@ namespace BankObjectsV2
     {
         private Bank _bank;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="bank"></param>
         public ActivitiesWindow(Bank bank)
         {
             InitializeComponent();
@@ -18,6 +22,11 @@ namespace BankObjectsV2
             _bank = bank;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonOk_Click(object sender, RoutedEventArgs e)
         {
             string date1 = textBoxDate1.Text;
@@ -54,11 +63,21 @@ namespace BankObjectsV2
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listBoxActivities_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
