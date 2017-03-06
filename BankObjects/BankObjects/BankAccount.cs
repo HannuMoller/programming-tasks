@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BankObjects
@@ -7,14 +8,14 @@ namespace BankObjects
     {
         private string _accountNumber;
         private string _creationDate;
-        private ArrayList _activities;
+        private List<BankAccountActivity> _activities;
         private float _balance; // current balance
 
         public BankAccount(string accountNumber, string creationDate)
         {
             this._accountNumber = accountNumber;
             this._creationDate = creationDate;
-            _activities = new ArrayList();
+            _activities = new List<BankAccountActivity>();
             _balance = 0.0f;
         }
 
@@ -46,23 +47,21 @@ namespace BankObjects
         /// <returns></returns>
         public float GetBalance(string date)
         {
-            var balance2 = 0.0f;
+            var balance = 0.0f;
 
-            var activities2 = from BankAccountActivity activity in _activities
-                              where (activity.Date.CompareTo(date) <= 0)
-                              select activity;
-            foreach (BankAccountActivity activity in activities2)
+            var activities = _activities.Where(activity => activity.Date.CompareTo(date) <= 0).ToList();
+            activities.ForEach (activity =>
             {
-                balance2 += activity.Amount;
-            }
-            return balance2;
+                balance += activity.Amount;
+            });
+            return balance;
         }
 
         /// <summary>
         /// get all bank account activities
         /// </summary>
         /// <returns></returns>
-        public ArrayList GetActivities()
+        public List<BankAccountActivity> GetActivities()
         {
             return _activities;
         }
@@ -75,11 +74,11 @@ namespace BankObjects
         /// <returns></returns>
         public BankAccountActivity[] GetActivities(string firstDate, string lastDate)
         {
-            var activities2 = from BankAccountActivity activity in _activities
+            var activities = from BankAccountActivity activity in _activities
                              where (activity.Date.CompareTo(firstDate) >= 0 && activity.Date.CompareTo(lastDate) <= 0)
                              select activity;
 
-            return activities2.ToArray();
+            return activities.ToArray();
         }
 
         /// <summary>
