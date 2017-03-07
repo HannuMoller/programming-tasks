@@ -4,16 +4,16 @@
 	- read bank account number, reference number, euro count, euro cent count and due date
 	- generate bank barcode (either domestic or international according to user selection)
 
-2. SkiJumping
+2. SkiJumping:
 	- hill properties (size, K-point, wind and gate compensation)
 	- judge points
 	- current and final standings list
 
 	http://www.ess.fi/urheilu/hiihtolajit/2013/03/06/ja-kokonaispisteet-ovat-nain-sujuu-makihypyn-pistelasku
 	
-3. BankObjects
+3. BankObjects:
 	- bank, customer, bank account, account activities
 	- creation and validation functions for both BBAN and IBAN
 
-3b. BankObjectsV2
+4. BankObjectsV2:
 	- some kind of WPF version of BankObjects
