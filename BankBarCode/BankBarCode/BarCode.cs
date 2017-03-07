@@ -63,7 +63,62 @@ namespace BankBarCode
         /// get bank barcode
         /// </summary>
         /// <returns> bank barcode </returns>
-        public abstract string GetBarCode();
+        protected abstract string GetBarCodeWithoutChecksum();
 
+        /// <summary>
+        /// get bank barcode
+        /// </summary>
+        /// <returns> bank barcode </returns>
+        public string GetBarCode()
+        {
+            string barcode = GetBarCodeWithoutChecksum();
+            string checksum = CalculateChecksum(barcode);
+            return barcode + checksum;
+        }
+
+        /// <summary>
+        /// calculate checksum using modulo 103 algorithm
+        /// </summary>
+        /// <param name="ban"></param>
+        /// <returns>checksum</returns>
+        private string CalculateChecksum(string ban)
+        {
+            int checksum = 105; // Code128C START CODE C
+            int multiplier = 1;
+            int i = 0; // stepper
+            while (i < ban.Length)
+            {
+                int b = int.Parse(ban.Substring(i, 2));
+                // Console.WriteLine("{0} * {1} = {2}", multiplier, b, multiplier*b);
+                checksum += multiplier * b;
+                multiplier++;
+                i += 2;
+            }
+
+            checksum %= 103;
+
+            // Console.WriteLine("checksum = {0}", checksum);
+
+            return string.Format("{0:D2}", checksum);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetFormattedBarCode()
+        {
+            var s = new StringBuilder("[105]");
+            string barcode = GetBarCodeWithoutChecksum();
+            int i = 0;
+            while ((i < barcode.Length))
+            {
+                s.Append(String.Format(" {0}", barcode.Substring(i, 2)));
+                i += 2;
+            }
+            s.Append(string.Format(" [{0}] [stop]", CalculateChecksum(barcode)));
+
+            return s.ToString();
+        }
     }
 }

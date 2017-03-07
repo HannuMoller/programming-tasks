@@ -116,7 +116,7 @@ namespace BankBarCode
             }
             barcode.SetDueDate(dueDate);
 
-            Console.WriteLine("IBAN = {0}", barcode.GetBarCode());
+            Console.WriteLine("IBAN = {0}", barcode.GetFormattedBarCode());
             Console.ReadKey();
         }
 

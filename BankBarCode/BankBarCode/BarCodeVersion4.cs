@@ -30,7 +30,7 @@ namespace BankBarCode
         /// get bank barcode (domestic format)
         /// </summary>
         /// <returns> bank barcode </returns>
-        public override string GetBarCode()
+        protected override string GetBarCodeWithoutChecksum()
         {
             string barcode = string.Format("4{0}{1:D6}{2:D2}000{3}{4}", account, euros, cents, reference, duedate);
             return barcode;
