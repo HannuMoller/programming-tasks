@@ -7,7 +7,7 @@ namespace SkiJumping
     /// </summary>
     class Compensation
     {
-        public Hill hill; // reference to the hill
+        private Hill _hill; // reference to the hill
 
         /// <summary>
         /// constructor
@@ -15,7 +15,13 @@ namespace SkiJumping
         /// <param name="hill"> reference to the hill object </param>
         public Compensation(Hill hill)
         {
-            this.hill = hill;
+            Hill = hill;
+        }
+
+        public Hill Hill
+        {
+            get { return _hill; }
+            set { _hill = value; }
         }
 
         /// <summary>
@@ -26,7 +32,7 @@ namespace SkiJumping
         /// <returns> compensation in meters (rounded in accuracy of half a meter) </returns>
         public float WindCompensation(float wind)
         {
-            float compensation = -wind * (hill.Kpoint - 36) / 20;
+            var compensation = -wind * (Hill.Kpoint - 36) / 20;
             return RoundedHalfMeter(compensation);
         }
 
@@ -36,8 +42,8 @@ namespace SkiJumping
         /// <returns> compensation in meters; rounded in accuracy of half a meter </returns>
         public float GateCompensation()
         {
-            float comp = ((float)(hill.baseGate - hill.currGate));
-            comp *= hill.gateStep * hill.gateCompensationPerMeter;
+            float comp = ((float)(Hill.BaseGate - Hill.CurrGate));
+            comp *= Hill.GateStep * Hill.GateCompensationPerMeter;
             return RoundedHalfMeter(comp);
             
         }
@@ -49,7 +55,7 @@ namespace SkiJumping
         /// <returns> the rounded value </returns>
         float RoundedHalfMeter(float m)
         {
-            decimal dcomp = (decimal)m;
+            var dcomp = (decimal)m;
             dcomp = Decimal.Round(2 * dcomp) / 2;
             return (float)dcomp;
         }

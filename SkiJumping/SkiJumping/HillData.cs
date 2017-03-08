@@ -17,15 +17,15 @@ namespace SkiJumping
         public static Hill ReadHill(string competition)
         {
             var f = File.OpenText("../../data/" + competition + ".Hill.txt");
-            String s = f.ReadLine();
-            string[] data = s.Split(':');
+            var s = f.ReadLine();
+            var data = s.Split(':');
             f.Close();
 
-            int Kpoint = int.Parse(data[0]);
-            int lowestGate = int.Parse(data[1]);
-            int highestGate = int.Parse(data[2]);
-            float gateStep = float.Parse(data[3]);
-            float gateCompensationPerMeter = float.Parse(data[4]);
+            var Kpoint = int.Parse(data[0]);
+            var lowestGate = int.Parse(data[1]);
+            var highestGate = int.Parse(data[2]);
+            var gateStep = float.Parse(data[3]);
+            var gateCompensationPerMeter = float.Parse(data[4]);
 
             return new Hill(competition, lowestGate, highestGate, Kpoint, gateStep, gateCompensationPerMeter);
         }

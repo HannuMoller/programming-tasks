@@ -21,11 +21,11 @@ namespace SkiJumping
             var f = File.OpenText("../../data/" + competition + ".Athletes.txt");
             while (!f.EndOfStream)
             {
-                string[] data = f.ReadLine().Split(':');
+                var data = f.ReadLine().Split(':');
 
-                int number = int.Parse(data[0]);
-                string name = data[1];
-                string country = data[2];
+                var number = int.Parse(data[0]);
+                var name = data[1];
+                var country = data[2];
                 athletes.Add(number, new Athlete(number, name, country));
             }
             f.Close();

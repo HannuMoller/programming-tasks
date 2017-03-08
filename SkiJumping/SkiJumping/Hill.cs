@@ -6,15 +6,15 @@ namespace SkiJumping
     /// </summary>
     class Hill
     {
-        public string name; // name of the hill
-        public int Kpoint; // K-point, in meters
-        public int lowestGate;
-        public int highestGate;
-        public int baseGate; // gate number in the beginning of the competition
-        public int currGate; // current gate number
+        private string _name; // name of the hill
+        private int _Kpoint; // K-point, in meters
+        private int _lowestGate;
+        private int _highestGate;
+        private int _baseGate; // gate number in the beginning of the competition
+        private int _currGate; // current gate number
 
-        public float gateStep; // meters (gap between successive gates)
-        public float gateCompensationPerMeter; // meters per meter
+        private float _gateStep; // meters (gap between successive gates)
+        private float _gateCompensationPerMeter; // meters per meter
        
         /// <summary>
         /// constructor
@@ -27,34 +27,73 @@ namespace SkiJumping
         /// <param name="gateCompensation"> compensation of gate change </param>
         public Hill(string name, int lowestGate, int highestGate, int Kpoint, float gateStep, float gateCompensationPerMeter)
         {
-            this.name = name;
+            Name = name;
             this.Kpoint = Kpoint;
-            this.lowestGate = lowestGate;
-            this.highestGate = highestGate;
-            this.gateStep = gateStep;
-            this.gateCompensationPerMeter = gateCompensationPerMeter;
+            LowestGate = lowestGate;
+            HighestGate = highestGate;
+            GateStep = gateStep;
+            GateCompensationPerMeter = gateCompensationPerMeter;
 
-            this.baseGate = lowestGate;
-            this.currGate = lowestGate;
+            BaseGate = lowestGate;
+            CurrGate = lowestGate;
         }
 
-        /// <summary>
-        /// set base gate at the beginning of the competition
-        /// </summary>
-        /// <param name="baseGate"> gate number </param>
-        public void SetBaseGate(int baseGate)
+        public string Name
         {
-            this.baseGate = baseGate;
-            this.currGate = baseGate;
+            get { return _name; }
+            set { _name = value; }
         }
 
+        public int Kpoint
+        {
+            get { return _Kpoint; }
+            set { _Kpoint = value; }
+        }
+
+        public int LowestGate
+        {
+            get { return _lowestGate; }
+            set { _lowestGate = value; }
+        }
+
+        public int HighestGate
+        {
+            get { return _highestGate; }
+            set { _highestGate = value; }
+        }
+
+        public int BaseGate
+        {
+            get { return _baseGate; }
+            set { _baseGate = value; _currGate = value; }
+        }
+
+        public int CurrGate
+        {
+            get { return _currGate; }
+            set { _currGate = value; }
+        }
+
+        public float GateStep
+        {
+            get { return _gateStep; }
+            set { _gateStep = value; }
+        }
+
+        public float GateCompensationPerMeter
+        {
+            get { return _gateCompensationPerMeter; }
+            set { _gateCompensationPerMeter = value; }
+        }
+
+        
         /// <summary>
         /// change gate
         /// </summary>
         /// <param name="newGate"> new gate for the athletes </param>
         public void ChangeGate(int newGate)
         {
-            currGate = newGate;
+            CurrGate = newGate;
         }
 
 

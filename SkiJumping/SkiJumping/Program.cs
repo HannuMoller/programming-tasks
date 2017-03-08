@@ -35,18 +35,18 @@ namespace SkiJumping
         {
             Console.WriteLine("Ski Jumping Competition Result Calculation System v1.0");
             Console.Write("Enter competition name : ");
-            string competition = Console.ReadLine();
+            var competition = Console.ReadLine();
 
             var hill = HillData.ReadHill(competition);
             var athletes = AthleteData.ReadAthletes(competition);
             Console.WriteLine("{0} athletes.", athletes.Count);
 
             var compensation = new Compensation(hill);
-            hill.SetBaseGate(Interact.SelectGate(hill, "startup"));
+            hill.BaseGate = Interact.SelectGate(hill, "startup");
 
             var results = new SortedList(new FloatComparer());
 
-            Console.WriteLine("Hill {0}, K-point = {1}m, starting at gate {2}", competition, hill.Kpoint, hill.baseGate);
+            Console.WriteLine("Hill {0}, K-point = {1}m, starting at gate {2}", competition, hill.Kpoint, hill.BaseGate);
 
             Console.WriteLine("Competition starts:");
             var i = 0;
@@ -55,17 +55,17 @@ namespace SkiJumping
                 var a1 = (Athlete)athletes.GetByIndex(i);
                 i++;
 
-                Console.WriteLine("Athlete #{0}: {1} {2} ({3})", i, a1.number, a1.name, a1.country);
+                Console.WriteLine("Athlete #{0}: {1} {2} ({3})", i, a1.Number, a1.Name, a1.Country);
 
                 if (Interact.ChangeGate())
                 {
                     hill.ChangeGate(Interact.SelectGate(hill, "new"));
                 }
 
-                float length = Interact.ReadFloat("jump length");
-                float wind = Interact.ReadFloat("wind");
+                var length = Interact.ReadFloat("jump length");
+                var wind = Interact.ReadFloat("wind");
 
-                float points = hill.GetPoints(length, compensation.WindCompensation(wind), compensation.GateCompensation());
+                var points = hill.GetPoints(length, compensation.WindCompensation(wind), compensation.GateCompensation());
                 points += Judges.GetPoints();
                 if (points < 0.0f)
                 {
@@ -74,8 +74,8 @@ namespace SkiJumping
                 }
                 Console.WriteLine("- points: {0:F1}", points);
 
-                a1.SetJump(length);
-                a1.SetPoints(points);
+                a1.Jump = length;
+                a1.Points = points;
 
                 results.Add(points, a1);
 
@@ -93,19 +93,19 @@ namespace SkiJumping
         public static void ShowStandings(SortedList standings)
         {
             Console.WriteLine("Current standings:\n==================");
-            int i = 0;
-            float prev_points = -1.0f;
-            int pos = -1;
+            var i = 0;
+            var prev_points = -1.0f;
+            var pos = -1;
             while (i < standings.Count)
             {
-                Athlete a = (Athlete) standings.GetByIndex(i);
+                var a = (Athlete) standings.GetByIndex(i);
                 i++;
-                if (a.points != prev_points)
+                if (a.Points != prev_points)
                 {
-                    prev_points = a.points;
+                    prev_points = a.Points;
                     pos = i;
                 }
-                Console.WriteLine("{0}: [{1}] {2} ({3}) {4:F1}m {5:F1}p", pos, a.number, a.name, a.country, a.jump, a.points);
+                Console.WriteLine("{0}: [{1}] {2} ({3}) {4:F1}m {5:F1}p", pos, a.Number, a.Name, a.Country, a.Jump, a.Points);
             }
             Console.WriteLine("");
         }

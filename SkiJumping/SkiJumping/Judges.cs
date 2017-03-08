@@ -17,13 +17,13 @@ namespace SkiJumping
         {
             var points = new float[JUDGES];
 
-            int i = 0;
+            var i = 0;
             while (i < JUDGES)
             {
                 try
                 {
                     Console.Write("Points of judge#{0} (1.0 .. 20.0) : ", i+1);
-                    float f = float.Parse(Console.ReadLine());
+                    var f = float.Parse(Console.ReadLine());
                     if (f >= 1.0f && f <= 20.0f)
                     {
                         points[i] = f;
@@ -39,7 +39,7 @@ namespace SkiJumping
             Array.Sort(points);
 
             // sum the points given by the judges, ignoring highest value and lowest value (= first and last values in the array)
-            float total = 0;
+            var total = 0f;
             i = 1;
             while (i < JUDGES-1)
             {

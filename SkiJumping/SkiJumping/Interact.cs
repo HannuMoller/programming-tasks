@@ -16,7 +16,7 @@ namespace SkiJumping
         /// <returns> number read </returns>
         public static float ReadFloat(string prompt)
         {
-            float f = float.NaN;
+            var f = float.NaN;
             while (float.IsNaN(f))
             {
                 try
@@ -44,7 +44,7 @@ namespace SkiJumping
             while (true)
             {
                 Console.Write("Change gate (Y/N) : ");
-                char c = char.ToUpper(Console.ReadKey().KeyChar);
+                var c = char.ToUpper(Console.ReadKey().KeyChar);
                 Console.WriteLine();
                 if (c == 'Y')
                 {
@@ -62,17 +62,18 @@ namespace SkiJumping
         /// <summary>
         /// Ask user for which gate to be used
         /// </summary>
+        /// <param name="hill"></param>
         /// <param name="type"> clarification (is this the startup gate or gate change) </param>
         /// <returns> gate number </returns>
         public static int SelectGate(Hill hill, string type)
         {
             while (true)
             {
-                Console.Write("Select {0} gate ({1}..{2}, current {3}) : ", type, hill.lowestGate, hill.highestGate, hill.currGate);
+                Console.Write("Select {0} gate ({1}..{2}, current {3}) : ", type, hill.LowestGate, hill.HighestGate, hill.CurrGate);
                 try
                 {
-                    int gate = int.Parse(Console.ReadLine());
-                    if (gate >= hill.lowestGate && gate <= hill.highestGate)
+                    var gate = int.Parse(Console.ReadLine());
+                    if (gate >= hill.LowestGate && gate <= hill.HighestGate)
                     {
                         return gate;
                     }

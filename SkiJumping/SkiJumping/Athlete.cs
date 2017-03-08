@@ -6,11 +6,11 @@ namespace SkiJumping
     /// </summary>
     class Athlete
     {
-        public int number; // jumper's starting number (jump order)
-        public string name; // jumper's name
-        public string country; // country the jumper represents
-        public float jump; // length in meters
-        public float points; // total points
+        private int _number; // jumper's starting number (jump order)
+        private string _name; // jumper's name
+        private string _country; // country the jumper represents
+        private float _jump; // length in meters
+        private float _points; // total points
 
         /// <summary>
         /// constructor
@@ -20,38 +20,51 @@ namespace SkiJumping
         /// <param name="country"> jumper's country </param>
         public Athlete(int number, string name, string country)
         {
-            this.number = number;
-            this.name = name;
-            this.country = country;
-            this.jump = 0.0f;
-            this.points = 0.0f;
+            Number = number;
+            Name = name;
+            Country = country;
+            Jump = 0.0f;
+            Points = 0.0f;
         }
 
-        /// <summary>
-        /// set jumper's jump length
-        /// </summary>
-        /// <param name="jump"> jump length in meters </param>
-        public void SetJump(float jump)
+        public int Number
         {
-            this.jump = jump;
+            get { return _number; }
+            set { _number = value; }
         }
 
-        /// <summary>
-        /// set jumper's total points
-        /// </summary>
-        /// <param name="points"> points </param>
-        public void SetPoints(float points)
+        public string Name
         {
-            this.points = points;
+            get { return _name; }
+            set { _name = value; }
         }
 
+        public string Country
+        {
+            get { return _country; }
+            set { _country = value; }
+        }
+
+        public float Jump
+        {
+            get { return _jump; }
+            set { _jump = value; }
+        }
+
+        public float Points
+        {
+            get { return _points; }
+            set { _points = value; }
+        }
+
+        
         /// <summary>
         /// one-line presentation of jumper data
         /// </summary>
         /// <returns> jumper data </returns>
         public override string ToString()
         {
-            return string.Format("{0}:{1} ({2}), {3:F1}m, {4:F1}", number, name, country, jump, points);
+            return string.Format("{0}:{1} ({2}), {3:F1}m, {4:F1}", Number, Name, Country, Jump, Points);
         }
 
     }
