@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Bank.cs" />
     <Compile Include="BankAccount.cs" />
-    <Compile Include="BankAccountActivity.cs" />
+    <Compile Include="BankAccountTransaction.cs" />
     <Compile Include="BankUtils.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Program.cs" />

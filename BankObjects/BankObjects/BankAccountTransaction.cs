@@ -3,7 +3,7 @@
     /// <summary>
     /// One bank account activity
     /// </summary>
-    public class BankAccountActivity
+    public class BankAccountTransaction
     {
         private string _date;
         private float _amount;
@@ -13,7 +13,7 @@
         /// </summary>
         /// <param name="date"> date of activity </param>
         /// <param name="amount"> amount of money </param>
-        public BankAccountActivity(string date, float amount)
+        public BankAccountTransaction(string date, float amount)
         {
             this._date = date;
             this._amount = amount;
