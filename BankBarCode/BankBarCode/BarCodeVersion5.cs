@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BankBarCode
+﻿namespace BankBarCode
 {
     /// <summary>
     /// International bank barcode
@@ -28,7 +22,7 @@ namespace BankBarCode
                 // fill leading zeros
                 reference = reference.Insert(2, "0");
             }
-            this.reference = reference;
+            this._reference = reference;
         }
 
         /// <summary>
@@ -37,8 +31,7 @@ namespace BankBarCode
         /// <returns> bank bar code </returns>
         protected override string GetBarCodeWithoutChecksum()
         {
-            string barcode = string.Format("5{0}{1:D6}{2:D2}{3}{4}", account, euros, cents, reference, duedate);
-            return barcode;
+            return $"5{_account}{_euros:D6}{_cents:D2}{_reference}{_duedate}";
         }
 
     }

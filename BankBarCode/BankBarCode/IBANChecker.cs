@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankBarCode
 {
@@ -30,17 +27,10 @@ namespace BankBarCode
                 int ch1 = account.ElementAt(0) - 'A' + 10;
                 int ch2 = account.ElementAt(1) - 'A' + 10;
                 int chk = int.Parse(account.Substring(2, 2));
-                acc2 += string.Format("{0:D2}{1:D2}{2}", ch1, ch2, account.Substring(2,2));
+                acc2 += $"{ch1:D2}{ch2:D2}{account.Substring(2, 2)}";
                 decimal all = decimal.Parse(acc2);
-                if (all % 97 == 1)
-                {
-                    return true;
-                }
-                else
-                {
-                    return true;
-                }
 
+                return (all % 97 == 1);
             }
             catch (Exception ex)
             {

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankBarCode
 {
@@ -20,25 +16,22 @@ namespace BankBarCode
         public static bool Check(string reference)
         {
             var multipliers = new int[] { 7, 3, 1 };
-            int mx = multipliers.Length - 1;
+            var mx = multipliers.Length;
+            var cc = reference.ToCharArray();
 
             try
             {
-                int i = reference.Length-1;
-                int chk = int.Parse(reference.Substring(i)); // original checksum
-                int chk0 = 0; // calculated checksum
-                int m = 0;
+                var i = cc.Length-1;
+                var chk = cc[i] - '0'; // original checksum
+                var chk0 = 0; // calculated checksum
+                var m = 0;
                 while (i > 0)
                 {
                     i--;
-                    int c = int.Parse(reference.Substring(i, 1));
-                    int mp = multipliers[m];
+                    var c = cc[i] - '0';
+                    var mp = multipliers[m];
                     chk0 += c * mp;
-                    m++;
-                    if (m > mx)
-                    {
-                        m = 0;
-                    }
+                    m = (m + 1) % mx;
                 }
 
                 chk0 = (10 - (chk0 % 10)) % 10;
@@ -64,7 +57,7 @@ namespace BankBarCode
             {
                 decimal drf = decimal.Parse(reference + "271500");
                 int mod = 98 - (int) (drf % 97);
-                string isoref = string.Format("RF{0:D2}{1}", mod, reference);
+                string isoref = $"RF{mod:D2}{reference}";
                 Console.WriteLine("ISO11649: {0}", isoref);
                 return isoref;
             }

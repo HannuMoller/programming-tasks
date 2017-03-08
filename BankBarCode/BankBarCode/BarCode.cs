@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace BankBarCode
 {
@@ -11,11 +8,11 @@ namespace BankBarCode
     /// </summary>
     abstract class BarCode
     {
-        protected string account; // 16 digits
-        protected int euros; // 6 digits
-        protected int cents; // 2 digits
-        protected string reference; // 20 digits (in version 4 (domestic), 23 digits in version 5 (international))
-        protected string duedate; // YYMMDD = 6 digits
+        protected string _account; // 16 digits
+        protected int _euros; // 6 digits
+        protected int _cents; // 2 digits
+        protected string _reference; // 20 digits (in version 4 (domestic), 23 digits in version 5 (international))
+        protected string _duedate; // YYMMDD = 6 digits
 
         /// <summary>
         /// set bank account number
@@ -23,7 +20,7 @@ namespace BankBarCode
         /// <param name="account"> bank account number </param>
         public void SetAccount(string account)
         {
-            this.account = account.Substring(2); // remove leading two letters
+            this._account = account.Substring(2); // remove leading two letters
         }
 
         /// <summary>
@@ -38,7 +35,7 @@ namespace BankBarCode
         /// <param name="euros"> euro count </param>
         public void SetEuros(int euros)
         {
-            this.euros = euros;
+            this._euros = euros;
         }
 
         /// <summary>
@@ -47,7 +44,7 @@ namespace BankBarCode
         /// <param name="cents"> euro cent count </param>
         public void SetCents(int cents)
         {
-            this.cents = cents;
+            this._cents = cents;
         }
 
         /// <summary>
@@ -56,7 +53,7 @@ namespace BankBarCode
         /// <param name="date"> due date </param>
         public void SetDueDate(string date)
         {
-            this.duedate = date;
+            this._duedate = date;
         }
 
         /// <summary>
@@ -89,7 +86,6 @@ namespace BankBarCode
             while (i < ban.Length)
             {
                 int b = int.Parse(ban.Substring(i, 2));
-                // Console.WriteLine("{0} * {1} = {2}", multiplier, b, multiplier*b);
                 checksum += multiplier * b;
                 multiplier++;
                 i += 2;
@@ -97,9 +93,7 @@ namespace BankBarCode
 
             checksum %= 103;
 
-            // Console.WriteLine("checksum = {0}", checksum);
-
-            return string.Format("{0:D2}", checksum);
+            return $"{checksum:D2}";
         }
 
         /// <summary>
@@ -113,10 +107,10 @@ namespace BankBarCode
             int i = 0;
             while ((i < barcode.Length))
             {
-                s.Append(String.Format(" {0}", barcode.Substring(i, 2)));
+                s.Append($" {barcode.Substring(i, 2)}");
                 i += 2;
             }
-            s.Append(string.Format(" [{0}] [stop]", CalculateChecksum(barcode)));
+            s.Append($" [{CalculateChecksum(barcode)}] [stop]");
 
             return s.ToString();
         }
