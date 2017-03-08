@@ -29,38 +29,42 @@ namespace BankObjectsV2
         /// <param name="e"></param>
         private void buttonOk_Click(object sender, RoutedEventArgs e)
         {
-            string date1 = textBoxDate1.Text;
+            var date1 = textBoxDate1.Text;
             if (!BankUtils.ValidateDate(date1))
             {
                 MessageBox.Show("Alkupäivämäärä virheellinen");
                 return;
             }
-            string date2 = textBoxDate2.Text;
+            var date2 = textBoxDate2.Text;
             if (!BankUtils.ValidateDate(date2))
             {
                 MessageBox.Show("Loppupäivämäärä virheellinen!");
                 return;
             }
 
-            //
-
             listBoxActivities.Items.Clear();
-            foreach (var customer in _bank.Customers)
-            {
-                var account = _bank.GetBankAccount(customer.BankAccountNumber);
-                var prevDate = BankUtils.PreviousDate(date1);
-                float balance = account.GetBalance(prevDate);
-                listBoxActivities.Items.Add(string.Format("Asiakas: {0}, tili: {1}, saldo {2}: {3:F2}", customer, customer.BankAccountNumber, prevDate, balance));
 
-                var transactions = account.GetTransactions(date1, date2);
-
-                foreach (BankAccountTransaction transaction in transactions)
+            _bank.Customers.ForEach(
+                customer =>
                 {
-                    balance += transaction.Amount;
-                    listBoxActivities.Items.Add(string.Format("Päivämäärä: {0}, summa: {1,12:F2}, saldo: {2,12:F2}", transaction.Date, transaction.Amount, balance));
+                    var account = _bank.GetBankAccount(customer.BankAccountNumber);
+                    var prevDate = BankUtils.PreviousDate(date1);
+                    var balance = account.GetBalance(prevDate);
+                    listBoxActivities.Items.Add(
+                        $"Asiakas: {customer}, tili: {customer.BankAccountNumber}, saldo {prevDate}: {balance:F2}");
+
+                    account.GetTransactions(date1, date2).ForEach(
+                        transaction =>
+                        {
+                            balance += transaction.Amount;
+                            listBoxActivities.Items.Add(
+                                $"Päivämäärä: {transaction.Date}, summa: {transaction.Amount,12:F2}, saldo: {balance,12:F2}");
+                        }
+                    );
+                    listBoxActivities.Items.Add("");
                 }
-                listBoxActivities.Items.Add("");
-            }
+            );
+
         }
 
         /// <summary>

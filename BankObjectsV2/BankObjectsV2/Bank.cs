@@ -8,9 +8,7 @@ namespace BankObjects
     /// </summary>
     public class Bank
     {
-        private string _name;
         private List<BankAccount> _bankAccounts;
-        private List<Customer> _customers;
 
         /// <summary>
         /// Constructor
@@ -18,26 +16,18 @@ namespace BankObjects
         /// <param name="name"> bank's name </param>
         public Bank(string name)
         {
-            this._name = name;
+            Name = name;
             this._bankAccounts = new List<BankAccount>();
-            this._customers = new List<Customer>();
+            Customers = new List<Customer>();
         }
 
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+        public string Name { get; set; }
 
-        public List<Customer> Customers
-        {
-            get { return _customers; }
-            set { _customers = value; }
-        }
+        public List<Customer> Customers { get; set; }
 
         public void AddCustomer(Customer customer)
         {
-            _customers.Add(customer);
+            Customers.Add(customer);
         }
 
         /// <summary>

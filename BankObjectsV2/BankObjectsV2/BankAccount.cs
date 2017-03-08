@@ -6,31 +6,18 @@ namespace BankObjects
 {
     public class BankAccount
     {
-        private string _accountNumber;
         private List<BankAccountTransaction> _transactions;
-        private float _balance; // current balance
 
         public BankAccount(string accountNumber)
         {
-            this._accountNumber = accountNumber;
+            this.AccountNumber = accountNumber;
             _transactions = new List<BankAccountTransaction>();
-            _balance = 0.0f;
+            Balance = 0.0f;
         }
 
-        public string AccountNumber
-        {
-            get { return _accountNumber; }
-            set { _accountNumber = value; }
-        }
+        public string AccountNumber { get; set; }
 
-        /// <summary>
-        /// get current balance
-        /// </summary>
-        /// <returns> balance </returns>
-        public float Balance
-        {
-            get { return _balance; }
-        }
+        public float Balance { get; private set; }
 
 
         /// <summary>
@@ -65,13 +52,13 @@ namespace BankObjects
         /// <param name="firstDate"></param>
         /// <param name="lastDate"></param>
         /// <returns></returns>
-        public BankAccountTransaction[] GetTransactions(string firstDate, string lastDate)
+        public List<BankAccountTransaction> GetTransactions(string firstDate, string lastDate)
         {
             var transactions = from BankAccountTransaction transaction in _transactions
                 where (transaction.Date.CompareTo(firstDate) >= 0 && transaction.Date.CompareTo(lastDate) <= 0)
                 select transaction;
 
-            return transactions.ToArray();
+            return transactions.ToList();
         }
 
         /// <summary>
@@ -81,7 +68,7 @@ namespace BankObjects
         public void AddBankAccountTransaction(BankAccountTransaction transaction)
         {
             _transactions.Add(transaction);
-            _balance += transaction.Amount;
+            Balance += transaction.Amount;
         }
 
     }

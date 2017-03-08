@@ -37,20 +37,19 @@ namespace BankObjects
         /// <returns> checksum </returns>
         private static char GenerateBbanChecksum(string bban)
         {
-            char[] digits = bban.ToArray();
-            int checksum = 0;
-            var multipliers = new int[] { 2, 1 };
-            int i = digits.Length; // stepper for bban
-            int m = 0; // stepper for multipliers
+            var digits = bban.ToArray();
+            var checksum = 0;
+            var multipliers = 2;
+            var i = digits.Length; // stepper for bban
             while (i > 0)
             {
                 i--;
                 if (!char.IsDigit(digits[i]))
                     return '!'; // BBAN contained non-digit!
-                int n = multipliers[m] * (digits[i] - '0');
+                var n = multipliers * (digits[i] - '0');
                 n = n / 10 + n % 10; // if n was greater than 9, sum the digits (eg. 12 -> 1+2 -> 3)
                 checksum += n;
-                m = 1 - m;
+                multipliers = 3 - multipliers; // 2 -> 1 -> 2 -> 1 ...
             }
 
             checksum = (10 - (checksum % 10)) % 10;
@@ -66,7 +65,7 @@ namespace BankObjects
         public static string NormalizeBban(string bban)
         {
             bban = bban.Replace("-", "");
-            int fillPos = 0;
+            var fillPos = 0;
             switch (bban.ElementAt(0))
             {
                case '4': // Aktia Pankki, Säästöpankit, Paikallisosuuspankit
@@ -88,7 +87,7 @@ namespace BankObjects
         /// <returns> true, if account number is correct </returns>
         public static bool ValidateBban(string bban)
         {
-            string[] parts = bban.Split('-');
+            var parts = bban.Split('-');
             switch (parts.Count())
             {
                 case 2:
@@ -286,7 +285,7 @@ namespace BankObjects
 
             bban = NormalizeBban(bban);
 
-            char checksum = GenerateBbanChecksum(bban.Substring(0, 13));
+            var checksum = GenerateBbanChecksum(bban.Substring(0, 13));
             if (!char.IsDigit(checksum))
                 return false; // bban contained something which prevented checksum calculation
 
@@ -303,30 +302,30 @@ namespace BankObjects
         {
             try
             {
-                CultureInfo culture = CultureInfo.GetCultureInfo(countryCode);
+                var culture = CultureInfo.GetCultureInfo(countryCode);
                 bban = NormalizeBban(bban);
-                char[] ph1 = (bban + countryCode + "00").ToArray();
-                string iban = "";
-                for (int i=0; i<ph1.Length; i++)
+                var ph1 = (bban + countryCode + "00").ToArray();
+                var iban = "";
+                foreach (char t in ph1)
                 {
-                    if (char.IsDigit(ph1[i]))
+                    if (char.IsDigit(t))
                     {
-                        iban += ph1[i];
+                        iban += t;
                     }
                     else
                     {
-                        iban += string.Format("{0:D2}", (ph1[i] - 'A' + 10));
+                        iban += $"{(t - 'A' + 10):D2}";
                     }
                 }
                 int chk;
                 while (iban.Length > 7)
                 {
                     chk = int.Parse(iban.Substring(0, 7)) % 97;
-                    iban = string.Format("{0}{1}", chk, iban.Substring(7));
+                    iban = $"{chk}{iban.Substring(7)}";
                 }
                 chk = (98 - int.Parse(iban) % 97) % 97;
                 
-                return string.Format("{0}{1:D2}{2}", countryCode, chk, bban);
+                return $"{countryCode}{chk:D2}{bban}";
             }
             catch (CultureNotFoundException cnfe)
             {
@@ -345,11 +344,11 @@ namespace BankObjects
             var allowedBankGroups = new char[] { '1', '2', '6', '8' }; // keep it simple, use only these bank groups
 
             var rnd = new Random();
-            char bankGroup = allowedBankGroups[rnd.Next(allowedBankGroups.Length)];
-            int bankBody = rnd.Next(100000);
-            int accountBody = rnd.Next(10000000);
-            string bban = string.Format("{0}{1:D5}{2:D7}", bankGroup, bankBody, accountBody);
-            char checksum = GenerateBbanChecksum(bban);
+            var bankGroup = allowedBankGroups[rnd.Next(allowedBankGroups.Length)];
+            var bankBody = rnd.Next(100000);
+            var accountBody = rnd.Next(10000000);
+            var bban = $"{bankGroup}{bankBody:D5}{accountBody:D7}";
+            var checksum = GenerateBbanChecksum(bban);
 
             return CreateIban("FI", bban + checksum);
         }

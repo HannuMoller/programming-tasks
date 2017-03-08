@@ -44,7 +44,7 @@
         /// <returns></returns>
         public override string ToString()
         {
-            return string.Format("{0} {1}", _lastName, _firstName);
+            return $"{_lastName} {_firstName}";
         }
     }
 }
