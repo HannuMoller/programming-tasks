@@ -17,3 +17,6 @@
 
 4. BankObjectsV2:
 	- some kind of WPF version of BankObjects
+
+5. WpfSkiJumping:
+	- WPF version of SkiJumping
